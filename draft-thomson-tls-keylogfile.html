@@ -12,26 +12,26 @@ connection is described.  Recording secrets to a file in SSLKEYLOGFILE format
 allows diagnostic and logging tools that use this file to decrypt messages
 exchanged by TLS endpoints. 
     " name="description">
-<meta content="xml2rfc 3.17.4" name="generator">
+<meta content="xml2rfc 3.18.2" name="generator">
 <meta content="network transparency" name="keyword">
 <meta content="tls" name="keyword">
 <meta content="blockchain" name="keyword">
 <meta content="draft-thomson-tls-keylogfile-latest" name="ietf.draft">
 <!-- Generator version information:
-  xml2rfc 3.17.4
-    Python 3.11.4
+  xml2rfc 3.18.2
+    Python 3.11.6
     ConfigArgParse 1.5.3
     google-i18n-address 3.1.0
     intervaltree 3.1.0
     Jinja2 3.1.2
     lxml 4.9.3
-    platformdirs 3.9.1
+    platformdirs 4.1.0
     pycountry 22.3.5
     PyYAML 6.0
     requests 2.31.0
     setuptools 67.7.2
     six 1.16.0
-    wcwidth 0.2.6
+    wcwidth 0.2.12
 -->
 <link href="draft-thomson-tls-keylogfile.xml" rel="alternate" type="application/rfc+xml">
 <link href="#copyright" rel="license">
@@ -654,7 +654,7 @@ sub, sup {
 }
 #toc nav li {
   line-height: 1.3em;
-  margin: 0.75em 0;
+  margin: 2px 0;
   padding-left: 1.2em;
   text-indent: -1.2em;
 }
@@ -747,7 +747,7 @@ hr.addr {
     z-index: 2;
     top: 0;
     right: 0;
-    padding: 0;
+    padding: 1px 0 0 0;
     margin: 0;
     border-bottom: 1px solid #ccc;
     opacity: 0.6;
@@ -871,16 +871,13 @@ hr.addr {
     border-top: none;
     padding-top: 0;
   }
-  figure, pre {
+  figure, pre, .vcard {
     page-break-inside: avoid;
-  }
-  figure {
-    overflow: scroll;
   }
   h1, h2, h3, h4, h5, h6 {
     page-break-after: avoid;
   }
-  h2+*, h3+*, h4+*, h5+*, h6+* {
+  :is(h2, h3, h4, h5, h6)+*, dd {
     page-break-before: avoid;
   }
   pre {
@@ -893,6 +890,9 @@ hr.addr {
   }
   td {
     border-top: 1px solid #ddd;
+  }
+  .toplink {
+    display: none;
   }
 }
 
@@ -994,28 +994,6 @@ address div.right {
   text-align: right;
 }
 
-/* Give the table caption label the same styling as the figcaption */
-
-@media print {
-  .toplink {
-    display: none;
-  }
-
-  /* avoid overwriting the top border line with the ToC header */
-  #toc {
-    padding-top: 1px;
-  }
-
-  /* Avoid page breaks inside dl and author address entries */
-  dd {
-    page-break-before: avoid;
-  }
-  .vcard {
-    page-break-inside: avoid;
-  }
-
-}
-
 /* Dark mode. */
 @media (prefers-color-scheme: dark) {
 :root {
@@ -1052,11 +1030,11 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <thead><tr>
 <td class="left">Internet-Draft</td>
 <td class="center">SSLKEYLOGFILE</td>
-<td class="right">July 2023</td>
+<td class="right">December 2023</td>
 </tr></thead>
 <tfoot><tr>
 <td class="left">Thomson</td>
-<td class="center">Expires 31 January 2024</td>
+<td class="center">Expires 12 June 2024</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -1069,12 +1047,12 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <dd class="internet-draft">draft-thomson-tls-keylogfile-latest</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2023-07-30" class="published">30 July 2023</time>
+<time datetime="2023-12-10" class="published">10 December 2023</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Informational</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2024-01-31">31 January 2024</time></dd>
+<dd class="expires"><time datetime="2024-06-12">12 June 2024</time></dd>
 <dt class="label-authors">Author:</dt>
 <dd class="authors">
 <div class="author">
@@ -1127,7 +1105,7 @@ exchanged by TLS endpoints.<a href="#section-abstract-1" class="pilcrow">¶</a><
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 31 January 2024.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 12 June 2024.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -1226,9 +1204,9 @@ adoption of TLS as the name of the protocol.<a href="#section-1-2" class="pilcro
 TLS 1.2 <span>[<a href="#TLS12" class="cite xref">TLS12</a>]</span> and TLS 1.3 <span>[<a href="#TLS13" class="cite xref">TLS13</a>]</span>.  The format also
 supports earlier TLS versions, though use of earlier versions is forbidden
 <span>[<a href="#RFC8996" class="cite xref">RFC8996</a>]</span>.  This format can also be used with DTLS <span>[<a href="#DTLS13" class="cite xref">DTLS13</a>]</span>, QUIC
-<span>[<a href="#RFC9000" class="cite xref">RFC9000</a>]</span><span>[<a href="#RFC9001" class="cite xref">RFC9001</a>]</span>, and other protocols that also use the TLS key schedule.  Use
-of this format could complement other protocol-specific logging such as QLOG
-<span>[<a href="#QLOG" class="cite xref">QLOG</a>]</span>.<a href="#section-1-3" class="pilcrow">¶</a></p>
+<span>[<a href="#RFC9000" class="cite xref">RFC9000</a>]</span><span>[<a href="#RFC9001" class="cite xref">RFC9001</a>]</span>, and other protocols that also use the TLS key
+schedule.  Use of this format could complement other protocol-specific logging
+such as QLOG <span>[<a href="#QLOG" class="cite xref">QLOG</a>]</span>.<a href="#section-1-3" class="pilcrow">¶</a></p>
 <div id="applicability-statement">
 <section id="section-1.1">
         <h3 id="name-applicability-statement">
@@ -1270,43 +1248,45 @@ the file is generated.  Tools that process these files <span class="bcp14">MUST<
 followed by U+10), CR (U+13), or LF (U+10) as a line terminator.  Lines are
 ignored if they are empty or if the first character is an octothorp character
 ('#', U+23).  Other lines of the file each contain a single secret.<a href="#section-2-2" class="pilcrow">¶</a></p>
-<p id="section-2-3">Each secret is described using a single line composed of three values that are
-separated by a single space character (U+20).  These values are:<a href="#section-2-3" class="pilcrow">¶</a></p>
-<span class="break"></span><dl class="dlParallel" id="section-2-4">
-        <dt id="section-2-4.1">label:</dt>
-        <dd style="margin-left: 1.5em" id="section-2-4.2">
-          <p id="section-2-4.2.1">The label identifies the type of secret that is being conveyed; see <a href="#labels" class="auto internal xref">Section 2.1</a>
-for a description of the labels that are defined in this document.<a href="#section-2-4.2.1" class="pilcrow">¶</a></p>
+<p id="section-2-3">Implementations that record secrets to a file do so continuously as those
+secrets are generated.<a href="#section-2-3" class="pilcrow">¶</a></p>
+<p id="section-2-4">Each secret is described using a single line composed of three values that are
+separated by a single space character (U+20).  These values are:<a href="#section-2-4" class="pilcrow">¶</a></p>
+<span class="break"></span><dl class="dlParallel" id="section-2-5">
+        <dt id="section-2-5.1">label:</dt>
+        <dd style="margin-left: 1.5em" id="section-2-5.2">
+          <p id="section-2-5.2.1">The label identifies the type of secret that is being conveyed; see <a href="#labels" class="auto internal xref">Section 2.1</a>
+for a description of the labels that are defined in this document.<a href="#section-2-5.2.1" class="pilcrow">¶</a></p>
 </dd>
         <dd class="break"></dd>
-<dt id="section-2-4.3">client_random:</dt>
-        <dd style="margin-left: 1.5em" id="section-2-4.4">
-          <p id="section-2-4.4.1">The 32 byte value of the Random field from the ClientHello message that
+<dt id="section-2-5.3">client_random:</dt>
+        <dd style="margin-left: 1.5em" id="section-2-5.4">
+          <p id="section-2-5.4.1">The 32 byte value of the Random field from the ClientHello message that
 established the TLS connection.  This value is encoded as 64 hexadecimal
 characters.  Including this field allows a single file to include secrets from
 multiple connections and for the secrets to be applied to the correct
 connection, though this depends on being able to match records to the correct
-ClientHello message.<a href="#section-2-4.4.1" class="pilcrow">¶</a></p>
+ClientHello message.<a href="#section-2-5.4.1" class="pilcrow">¶</a></p>
 </dd>
         <dd class="break"></dd>
-<dt id="section-2-4.5">secret:</dt>
-        <dd style="margin-left: 1.5em" id="section-2-4.6">
-          <p id="section-2-4.6.1">The value of the identified secret for the identified connection.  This value
+<dt id="section-2-5.5">secret:</dt>
+        <dd style="margin-left: 1.5em" id="section-2-5.6">
+          <p id="section-2-5.6.1">The value of the identified secret for the identified connection.  This value
 is encoded in hexadecimal, with a length that depends on the size of the
-secret.<a href="#section-2-4.6.1" class="pilcrow">¶</a></p>
+secret.<a href="#section-2-5.6.1" class="pilcrow">¶</a></p>
 </dd>
       <dd class="break"></dd>
 </dl>
-<p id="section-2-5">For the hexadecimal values of the <code>client_random</code> or <code>secret</code>, no convention
+<p id="section-2-6">For the hexadecimal values of the <code>client_random</code> or <code>secret</code>, no convention
 exists for the case of characters 'a' through 'f' (or 'A' through 'F').  Files
 can be generated with either, so either form <span class="bcp14">MUST</span> be accepted when processing a
-file.<a href="#section-2-5" class="pilcrow">¶</a></p>
-<p id="section-2-6">Diagnostic tools that accept files in this format might choose to ignore lines
+file.<a href="#section-2-6" class="pilcrow">¶</a></p>
+<p id="section-2-7">Diagnostic tools that accept files in this format might choose to ignore lines
 that do not conform to this format in the interest of ensuring that secrets can
-be obtained from corrupted files.<a href="#section-2-6" class="pilcrow">¶</a></p>
-<p id="section-2-7">Logged secret values are not annotated with the ciphersuite or other connection
+be obtained from corrupted files.<a href="#section-2-7" class="pilcrow">¶</a></p>
+<p id="section-2-8">Logged secret values are not annotated with the ciphersuite or other connection
 parameters.  A record of the TLS handshake might therefore be needed to use the
-logged secrets.<a href="#section-2-7" class="pilcrow">¶</a></p>
+logged secrets.<a href="#section-2-8" class="pilcrow">¶</a></p>
 <div id="labels">
 <section id="section-2.1">
         <h3 id="name-secret-labels-for-tls-13">
@@ -1422,11 +1402,18 @@ obtains these secrets might be able to use this information to attack these
 applications.  A TLS implementation might either choose to omit these secrets in
 contexts where the information might be abused or to require separate
 authorization to enable logging of exporter secrets.<a href="#section-3-4" class="pilcrow">¶</a></p>
-<p id="section-3-5">Logging the TLS 1.2 "master" secret provides the recipient of a file in
+<p id="section-3-5">Using an environment variable, such as <code>SSLKEYLOGFILE</code>, to enable logging
+implies that access to the launch context for the application is needed to
+authorize logging.  On systems that support specially-named files, logs might be
+directed to these names so that logging does not result in storage, but enable
+consumption by other programs.  In both cases, applications might require
+special autorization or they might rely on system-level access control to limit
+access to these capabilities.<a href="#section-3-5" class="pilcrow">¶</a></p>
+<p id="section-3-6">Logging the TLS 1.2 "master" secret provides the recipient of a file in
 SSLKEYLOGFILE far greater access to an active connection.  This can include the
 ability to resume the connection and impersonate either endpoint, insert records
 that result in renegotiation, or even forge Finished messages.  Implementations
-might avoid these risks by not logging this secret value.<a href="#section-3-5" class="pilcrow">¶</a></p>
+might avoid these risks by not logging this secret value.<a href="#section-3-6" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="iana-considerations">
@@ -1544,6 +1531,7 @@ protected by TLS.<a href="#section-4-2.18.1" class="pilcrow">¶</a></p>
       <h2 id="name-references">
 <a href="#section-5" class="section-number selfRef">5. </a><a href="#name-references" class="section-name selfRef">References</a>
       </h2>
+<div id="sec-normative-references">
 <section id="section-5.1">
         <h3 id="name-normative-references">
 <a href="#section-5.1" class="section-number selfRef">5.1. </a><a href="#name-normative-references" class="section-name selfRef">Normative References</a>
@@ -1571,6 +1559,8 @@ protected by TLS.<a href="#section-4-2.18.1" class="pilcrow">¶</a></p>
 <dd class="break"></dd>
 </dl>
 </section>
+</div>
+<div id="sec-informative-references">
 <section id="section-5.2">
         <h3 id="name-informative-references">
 <a href="#section-5.2" class="section-number selfRef">5.2. </a><a href="#name-informative-references" class="section-name selfRef">Informative References</a>
@@ -1582,7 +1572,7 @@ protected by TLS.<a href="#section-4-2.18.1" class="pilcrow">¶</a></p>
 <dd class="break"></dd>
 <dt id="QLOG">[QLOG]</dt>
         <dd>
-<span class="refAuthor">Marx, R.</span>, <span class="refAuthor">Niccolini, L.</span>, <span class="refAuthor">Seemann, M.</span>, and <span class="refAuthor">L. Pardue</span>, <span class="refTitle">"Main logging schema for qlog"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-quic-qlog-main-schema-06</span>, <time datetime="2023-07-10" class="refDate">10 July 2023</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-quic-qlog-main-schema-06">https://datatracker.ietf.org/doc/html/draft-ietf-quic-qlog-main-schema-06</a>&gt;</span>. </dd>
+<span class="refAuthor">Marx, R.</span>, <span class="refAuthor">Niccolini, L.</span>, <span class="refAuthor">Seemann, M.</span>, and <span class="refAuthor">L. Pardue</span>, <span class="refTitle">"Main logging schema for qlog"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-quic-qlog-main-schema-07</span>, <time datetime="2023-10-23" class="refDate">23 October 2023</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-quic-qlog-main-schema-07">https://datatracker.ietf.org/doc/html/draft-ietf-quic-qlog-main-schema-07</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="RFC0020">[RFC0020]</dt>
         <dd>
@@ -1594,7 +1584,7 @@ protected by TLS.<a href="#section-4-2.18.1" class="pilcrow">¶</a></p>
 <dd class="break"></dd>
 <dt id="RFC8996">[RFC8996]</dt>
         <dd>
-<span class="refAuthor">Moriarty, K.</span> and <span class="refAuthor">S. Farrell</span>, <span class="refTitle">"Deprecating TLS 1.0 and TLS 1.1"</span>, <span class="seriesInfo">BCP 195</span>, <span class="seriesInfo">RFC 8996</span>, <span class="seriesInfo">DOI 10.17487/RFC8996</span>, <time datetime="2021-03" class="refDate">March 2021</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc8996">https://www.rfc-editor.org/rfc/rfc8996</a>&gt;</span>. </dd>
+<span class="refTitle">"*** BROKEN REFERENCE ***"</span>. </dd>
 <dd class="break"></dd>
 <dt id="RFC9000">[RFC9000]</dt>
         <dd>
@@ -1610,6 +1600,7 @@ protected by TLS.<a href="#section-4-2.18.1" class="pilcrow">¶</a></p>
 <dd class="break"></dd>
 </dl>
 </section>
+</div>
 </section>
 <div id="example">
 <section id="appendix-A">

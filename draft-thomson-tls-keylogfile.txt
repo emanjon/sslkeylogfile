@@ -4,8 +4,8 @@
 
 Transport Layer Security                                      M. Thomson
 Internet-Draft                                                   Mozilla
-Intended status: Informational                              30 July 2023
-Expires: 31 January 2024
+Intended status: Informational                          10 December 2023
+Expires: 12 June 2024
 
 
                     The SSLKEYLOGFILE Format for TLS
@@ -50,7 +50,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 31 January 2024.
+   This Internet-Draft will expire on 12 June 2024.
 
 Copyright Notice
 
@@ -138,6 +138,9 @@ Table of Contents
    line terminator.  Lines are ignored if they are empty or if the first
    character is an octothorp character ('#', U+23).  Other lines of the
    file each contain a single secret.
+
+   Implementations that record secrets to a file do so continuously as
+   those secrets are generated.
 
    Each secret is described using a single line composed of three values
    that are separated by a single space character (U+20).  These values
@@ -279,6 +282,15 @@ Table of Contents
    might be abused or to require separate authorization to enable
    logging of exporter secrets.
 
+   Using an environment variable, such as SSLKEYLOGFILE, to enable
+   logging implies that access to the launch context for the application
+   is needed to authorize logging.  On systems that support specially-
+   named files, logs might be directed to these names so that logging
+   does not result in storage, but enable consumption by other programs.
+   In both cases, applications might require special autorization or
+   they might rely on system-level access control to limit access to
+   these capabilities.
+
    Logging the TLS 1.2 "master" secret provides the recipient of a file
    in SSLKEYLOGFILE far greater access to an active connection.  This
    can include the ability to resume the connection and impersonate
@@ -352,9 +364,9 @@ Table of Contents
 
    [QLOG]     Marx, R., Niccolini, L., Seemann, M., and L. Pardue, "Main
               logging schema for qlog", Work in Progress, Internet-
-              Draft, draft-ietf-quic-qlog-main-schema-06, 10 July 2023,
-              <https://datatracker.ietf.org/doc/html/draft-ietf-quic-
-              qlog-main-schema-06>.
+              Draft, draft-ietf-quic-qlog-main-schema-07, 23 October
+              2023, <https://datatracker.ietf.org/doc/html/draft-ietf-
+              quic-qlog-main-schema-07>.
 
    [RFC0020]  Cerf, V., "ASCII format for network interchange", STD 80,
               RFC 20, DOI 10.17487/RFC0020, October 1969,
@@ -365,9 +377,7 @@ Table of Contents
               DOI 10.17487/RFC8471, October 2018,
               <https://www.rfc-editor.org/rfc/rfc8471>.
 
-   [RFC8996]  Moriarty, K. and S. Farrell, "Deprecating TLS 1.0 and TLS
-              1.1", BCP 195, RFC 8996, DOI 10.17487/RFC8996, March 2021,
-              <https://www.rfc-editor.org/rfc/rfc8996>.
+   [RFC8996]  "*** BROKEN REFERENCE ***".
 
    [RFC9000]  Iyengar, J., Ed. and M. Thomson, Ed., "QUIC: A UDP-Based
               Multiplexed and Secure Transport", RFC 9000,
